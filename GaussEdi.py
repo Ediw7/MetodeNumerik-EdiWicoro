@@ -1,9 +1,5 @@
-
-# Nama  : Edi Wicoro
-# NIM  : 21120122130073
-# Kelas  : Metode Numerik B / Teknik Komputer 
-
 import numpy as np
+import unittest
 
 # Fungsi Dekomposisi LU menggunakan metode eliminasi Gauss
 def lu_decomposition_gauss(matrix):
@@ -49,19 +45,14 @@ def solve_lu_decomposition(A, b):
 A = np.array([[1,1, 1], [1, 2, -1], [2, 1, 2]])
 b = np.array([6, 2, 10])
 
-# Langkah-langkah penyelesaian
-print("Langkah-langkah penyelesaian:")
-print("1. Menggunakan metode dekomposisi LU dengan metode eliminasi Gauss untuk matriks koefisien.")
-L, U = lu_decomposition_gauss(A)
-print("   Matriks L:")
-print(L)
-print("   Matriks U:")
-print(U)
+class TestLU(unittest.TestCase):
+    def test_solve_lu_decomposition(self):
+        # Expected solution
+        expected_solution = np.array([1, 2, 3])
+        # Compute the solution using LU decomposition
+        computed_solution = solve_lu_decomposition(A, b)
+        # Check if the computed solution matches the expected solution
+        np.testing.assert_array_almost_equal(computed_solution, expected_solution)
 
-
-# Menyelesaikan sistem persamaan linear
-solution = solve_lu_decomposition(A, b)
-print("\nSolusi:")
-print("x =", solution[0])
-print("y =", solution[1])
-print("z =", solution[2])
+if __name__ == '__main__':
+    unittest.main()
